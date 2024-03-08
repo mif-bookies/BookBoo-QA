@@ -40,6 +40,23 @@ function RootLayoutNav() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="login"
+        options={{
+          headerShown: true,
+          headerTitle: "Login",
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="signup"
+        options={{
+          headerShown: true,
+          headerTitle: "Signup",
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
   );
 }

@@ -24,6 +24,7 @@ const Layout = () => {
         name="discover"
         options={{
           title: "Discover",
+          headerTitleAlign: "center",
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="home-sharp" size={size} color={color} />
           ),
@@ -33,15 +34,17 @@ const Layout = () => {
         name="explore"
         options={{
           title: "Explore",
+          headerTitleAlign: "center",
           tabBarIcon: ({ size, color }) => (
             <Fontisto name="zoom" size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="lists"
+        name="collections"
         options={{
-          title: "Lists",
+          title: "Collections",
+          headerTitleAlign: "center",
           tabBarIcon: ({ size, color }) => (
             <Feather name="bookmark" size={size} color={color} />
           ),
@@ -51,6 +54,7 @@ const Layout = () => {
         name="profile"
         options={{
           title: "Profile",
+          headerTitleAlign: "center",
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="person" size={size} color={color} />
           ),

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@clerk/clerk-expo": "^0.20.8",
     "@expo/metro-runtime": "^3.1.1",
     "@types/react": "~18.2.45",
     "clsx": "^2.1.0",
@@ -21,12 +22,13 @@
     "react-native-web": "~0.19.6",
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "expo-secure-store": "~12.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3"
   },
-  "name": "reanimated",
+  "name": "bookboo",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "private": true,

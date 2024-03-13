@@ -79,7 +79,7 @@ books_df = pd.read_csv("books.csv", encoding="utf-8")
 
 num_rows = None  # Replace None with the desired number of rows or leave it as None to process the entire document
 author_inserts, genre_inserts = generate_combined_sql_inserts(books_df, num_rows)
-book_inserts = generate_chunked_book_inserts(books_df, chunk_size=500)
+book_inserts = generate_chunked_book_inserts(books_df, chunk_size=num_rows)
 
 write_chunks_to_files(book_inserts)
 

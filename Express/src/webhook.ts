@@ -80,14 +80,10 @@ router.post(
     if (eventType === "user.created") {
       const user_id = evt.data.id;
       const username = evt.data.username;
-      const createdAt = new Date(evt.data.created_at).toISOString();
-      const updatedAt = new Date(evt.data.updated_at).toISOString();
 
       const insertUser: InsertUser = {
         id: user_id,
-        username: username,
-        createdAt: createdAt,
-        updatedAt: updatedAt,
+        username: username || "BookBooUser",
       };
 
       try {
@@ -100,6 +96,9 @@ router.post(
 
     if (eventType === "user.deleted") {
       const user_id = evt.data.id;
+      if (typeof user_id !== "string") {
+        return res.status(400).json({ error: "Invalid user ID" });
+      }
       try {
         await db.delete(User).where(eq(User.id, user_id)).execute();
         console.log("User deleted:", id);

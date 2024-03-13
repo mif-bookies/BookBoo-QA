@@ -7,6 +7,7 @@ import {
   real,
   serial,
   text,
+  timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
 
@@ -25,7 +26,7 @@ export const Book = pgTable("Book", {
 export const BookAuthor = pgTable("BookAuthor", {
   id: serial("id").primaryKey(),
   book_id: integer("book_id")
-    .references(() => Book.id)
+    .references(() => Book.id, { onDelete: "cascade" })
     .notNull(),
   name: varchar("name", { length: 100 }).notNull(),
 });
@@ -33,9 +34,38 @@ export const BookAuthor = pgTable("BookAuthor", {
 export const BookGenre = pgTable("BookGenre", {
   id: serial("id").primaryKey(),
   book_id: integer("book_id")
-    .references(() => Book.id)
+    .references(() => Book.id, { onDelete: "cascade" })
     .notNull(),
   genre: varchar("genre", { length: 50 }).notNull(),
+});
+
+export const User = pgTable("User", {
+  id: varchar("id", { length: 100 }).primaryKey(),
+  username: varchar("username", { length: 200 }).notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+});
+
+export const Collection = pgTable("Collection", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 200 }).notNull(),
+  user_id: varchar("user_id", { length: 100 })
+    .references(() => User.id, { onDelete: "cascade" })
+    .notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+  public: boolean("public").notNull().default(false),
+});
+
+export const CollectionBook = pgTable("CollectionBook", {
+  id: serial("id").primaryKey(),
+  collection_id: integer("collection_id")
+    .references(() => Collection.id, { onDelete: "cascade" })
+    .notNull(),
+  book_id: integer("book_id")
+    .references(() => Book.id, { onDelete: "cascade" })
+    .notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
 });
 
 export const bookRelations = relations(Book, ({ many }) => ({
@@ -57,35 +87,6 @@ export const bookGenreRelations = relations(BookGenre, ({ one }) => ({
     references: [Book.id],
   }),
 }));
-
-export const User = pgTable("User", {
-  id: varchar("id", { length: 100 }).primaryKey(),
-  username: varchar("username", { length: 200 }).notNull(),
-  createdAt: date("createdAt").notNull().defaultNow(),
-  updatedAt: date("updatedAt").notNull().defaultNow(),
-});
-
-export const Collection = pgTable("Collection", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 200 }).notNull(),
-  user_id: varchar("user_id", { length: 100 })
-    .references(() => User.id)
-    .notNull(),
-  createdAt: date("createdAt").notNull().defaultNow(),
-  updatedAt: date("updatedAt").notNull().defaultNow(),
-  public: boolean("public").notNull().default(false),
-});
-
-export const CollectionBook = pgTable("CollectionBook", {
-  id: serial("id").primaryKey(),
-  collection_id: integer("collection_id")
-    .references(() => Collection.id)
-    .notNull(),
-  book_id: integer("book_id")
-    .references(() => Book.id)
-    .notNull(),
-  createdAt: date("createdAt").notNull().defaultNow(),
-});
 
 export const collectionRelations = relations(Collection, ({ many }) => ({
   collectionBooks: many(CollectionBook),

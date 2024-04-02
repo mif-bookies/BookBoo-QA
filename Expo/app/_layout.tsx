@@ -1,10 +1,11 @@
 import { ClerkProvider } from "@clerk/clerk-expo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import "../global.css";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -54,28 +55,43 @@ const InitialLayout = () => {
   if (!loaded) {
     return null;
   }
+  const queryClient = new QueryClient();
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen
-        name="(auth)/login"
-        options={{
-          headerShown: true,
-          headerTitle: "Login",
-          headerTitleAlign: "center",
-        }}
-      />
-      <Stack.Screen
-        name="(auth)/signup"
-        options={{
-          headerShown: true,
-          headerTitle: "Signup",
-          headerTitleAlign: "center",
-        }}
-      />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(auth)/login"
+          options={{
+            headerShown: true,
+            headerTitle: "Login",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="(auth)/signup"
+          options={{
+            headerShown: true,
+            headerTitle: "Signup",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="book/[id]"
+          options={{
+            headerShown: true,
+            headerTitle: "Book",
+            headerTitleAlign: "center",
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerShadowVisible: false,
+          }}
+        />
+      </Stack>
+    </QueryClientProvider>
   );
 };
 

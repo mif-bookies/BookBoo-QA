@@ -59,7 +59,7 @@ const Page = () => {
 
       await setActive({ session: completeSignUp.createdSessionId });
       router.push("/discover");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(JSON.stringify(err, null, 2));
     }
   };
@@ -113,7 +113,7 @@ const Page = () => {
               />
               <Pressable
                 android_ripple={{ color: "rgba(0,0,0,0.1)" }}
-                className=" flex items-center justify-center h-11 bg-blue-500 rounded-lg px-12 py-2 text-white text-sm font-medium ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50"
+                className=" flex items-center justify-center h-11 bg-blue-500 rounded-lg px-12 py-2 text-white text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
                 style={{ borderRadius: 8 }}
                 onPress={() => {
                   onSignUpPress();
@@ -155,7 +155,7 @@ const Page = () => {
               />
               <Pressable
                 android_ripple={{ color: "rgba(0,0,0,0.1)" }}
-                className=" flex items-center justify-center h-11 bg-blue-500 rounded-lg px-12 py-2 text-white text-sm font-medium ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50"
+                className=" flex items-center justify-center h-11 bg-blue-500 rounded-lg px-12 py-2 text-white text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
                 style={{ borderRadius: 8 }}
                 onPress={onPressVerify}
               >

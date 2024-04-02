@@ -19,7 +19,6 @@ export function OAuthButtons({ strategy, type, icon }: Props) {
 
   const { startOAuthFlow } = useOAuth({
     strategy: `oauth_${strategy}`,
-    redirectUrl: "exp://localhost:8081",
   });
 
   const onPress = React.useCallback(async () => {

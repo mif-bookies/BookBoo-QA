@@ -25,7 +25,7 @@ const Page = () => {
           <Pressable
             android_ripple={{ color: "rgba(0,0,0,0.1)" }}
             className={cn(
-              "flex items-center justify-center text-sm font-medium ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50 bg-blue-500 hover:bg-primary/90 h-11 px-16 py-2",
+              "flex items-center justify-center text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 bg-blue-500 hover:bg-primary/90 h-11 px-16 py-2",
               isSignedIn && "hidden"
             )}
             style={{ borderRadius: 8 }}
@@ -37,7 +37,7 @@ const Page = () => {
           <Pressable
             android_ripple={{ color: "rgba(0,0,0,0.1)" }}
             className={cn(
-              "flex items-center justify-center text-sm font-medium ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-background h-11 px-16 py-2",
+              "flex items-center justify-center text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-background h-11 px-16 py-2",
               isSignedIn && "bg-blue-500"
             )}
             style={{ borderRadius: 8 }}

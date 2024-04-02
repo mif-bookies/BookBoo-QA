@@ -55,5 +55,5 @@ app.get("/api/protected-endpoint", ClerkExpressRequireAuth(), (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`BookBoo Express listening on port ${PORT}`);
 });

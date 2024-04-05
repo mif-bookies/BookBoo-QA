@@ -2,6 +2,7 @@ import BookDetails from "@/components/BookDetails";
 import BookDetailsSkeleton from "@/components/BookDetailsSkeleton";
 import DropdownComponent from "@/components/Dropdown";
 import ListItem from "@/components/ListItem";
+import ListItemSkeleton from "@/components/ListItemSkeleton";
 import { Book } from "@/entities/book";
 import { api } from "@/libs/axios/api";
 import { useQuery } from "@tanstack/react-query";
@@ -68,13 +69,15 @@ const Page = () => {
         )}
         <View className="flex-1 h-0.5 bg-gray-300 my-2" />
       </View>
-      {recommendationsLoading && <Text>Loading...</Text>}
-      {recommendationsError && (
+      {recommendationsLoading ? (
+        Array.from({ length: Number(count) }).map((_, index) => (
+          <ListItemSkeleton key={`skeleton-${index}`} />
+        ))
+      ) : recommendationsError ? (
         <Text>Error: {recommendationsError.message}</Text>
+      ) : (
+        recommendations?.map((book) => <ListItem {...book} key={book.id} />)
       )}
-      {recommendations?.map((book) => (
-        <ListItem {...book} key={book.id} />
-      ))}
     </ScrollView>
   );
 };

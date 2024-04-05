@@ -92,7 +92,7 @@ const Page = () => {
           className=" flex items-center justify-center text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-background h-11 px-8 py-2"
           style={{ borderRadius: 8 }}
           onPress={() => swiperRef.current?.swipeLeft()}
-          disabled={currentIndex === 0}
+          disabled={!isSuccess || currentIndex === 0}
         >
           <FontAwesomeIcon icon={faAngleLeft} size={28} color={"#1e293b"} />
         </Pressable>
@@ -100,6 +100,7 @@ const Page = () => {
           android_ripple={{ color: "rgba(0,0,0,0.1)" }}
           className="flex items-center h-11 justify-center bg-blue-500 rounded-lg px-8 py-2 text-white text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
           style={{ borderRadius: 8 }}
+          disabled={!isSuccess}
           onPress={() => {
             router.push({
               pathname: "/book/[id]",
@@ -114,7 +115,7 @@ const Page = () => {
           className="flex items-center justify-center text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-background h-11 px-8 py-2"
           style={{ borderRadius: 8 }}
           onPress={() => swiperRef.current?.swipeRight()}
-          disabled={currentIndex === books.length - 1}
+          disabled={!isSuccess || currentIndex === books.length - 1}
         >
           <FontAwesomeIcon icon={faAngleRight} size={28} color={"#1e293b"} />
         </Pressable>

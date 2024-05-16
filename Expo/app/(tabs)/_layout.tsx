@@ -43,8 +43,7 @@ const Layout = () => {
       <Tabs.Screen
         name="collections"
         options={{
-          title: "Collections",
-          headerTitleAlign: "center",
+          headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <Feather name="bookmark" size={size} color={color} />
           ),

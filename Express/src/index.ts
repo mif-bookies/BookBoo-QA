@@ -1,11 +1,11 @@
-import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 import cors from "cors";
 import dotenv from "dotenv";
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import BookRouter from "./book";
 import CollectionRouter from "./collection";
 import RecommendationRouter from "./recommendation";
 import WebhookRouter from "./webhook";
+import { authMiddleware } from "./middlewares/authMiddleware";
 
 declare module "express-serve-static-core" {
   interface Request {
@@ -47,11 +47,23 @@ app.use(BookRouter);
 app.use(RecommendationRouter);
 app.use(CollectionRouter);
 
-app.get("/api/protected-endpoint", ClerkExpressRequireAuth(), (req, res) => {
-  if (!req.auth) {
-    return res.status(401).send("Unauthorized request!");
+app.get(
+  "/api/protected-endpoint",
+  authMiddleware,
+  (req: Request, res: Response) => {
+    if (!req.auth) {
+      return res.status(401).json({ error: "Unauthorized request!" });
+    }
+    res.json(req.auth);
   }
-  res.json(req.auth);
+);
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error("Error occurred:", err.message || err);
+  if (err.message === "Unauthenticated") {
+    return res.status(401).json({ error: "Unauthorized request!" });
+  }
+  res.status(500).json({ error: "Something went wrong!" });
 });
 
 app.listen(PORT, () => {

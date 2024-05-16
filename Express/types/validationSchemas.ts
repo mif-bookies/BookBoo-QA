@@ -28,8 +28,8 @@ export const deleteBookFromCollectionParamsSchema = z.object({
 export const updateCollectionBodySchema = z
   .object({
     name: z.string().min(1).optional(),
-    isPublic: z.boolean().optional(),
+    public: z.boolean().optional(),
   })
-  .refine((data) => data.name || data.isPublic !== undefined, {
-    message: "At least one field (name or isPublic) must be provided",
+  .refine((data) => data.name || data.public !== undefined, {
+    message: "At least one field (name or public) must be provided",
   });

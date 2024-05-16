@@ -1,18 +1,12 @@
-import { useEffect } from "react";
 import { useAuth } from "@clerk/clerk-expo";
-import axios from "axios";
-
-const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
-
-export const authenticatedApi = axios.create({
-  baseURL: BACKEND_URL,
-});
+import { useEffect } from "react";
+import { api } from "./api";
 
 export const useSetupAuthenticatedApi = () => {
   const { getToken } = useAuth();
 
   useEffect(() => {
-    const requestInterceptor = authenticatedApi.interceptors.request.use(
+    const requestInterceptor = api.interceptors.request.use(
       async (config) => {
         const token = await getToken();
         if (token) {
@@ -28,7 +22,7 @@ export const useSetupAuthenticatedApi = () => {
     );
 
     return () => {
-      authenticatedApi.interceptors.request.eject(requestInterceptor);
+      api.interceptors.request.eject(requestInterceptor);
     };
   }, [getToken]);
 };

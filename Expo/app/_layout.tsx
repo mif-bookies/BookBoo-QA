@@ -7,6 +7,7 @@ import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import "../global.css";
+import { Gesture, GestureHandlerRootView } from "react-native-gesture-handler";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -59,38 +60,40 @@ const InitialLayout = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="(auth)/login"
-          options={{
-            headerShown: true,
-            headerTitle: "Login",
-            headerTitleAlign: "center",
-          }}
-        />
-        <Stack.Screen
-          name="(auth)/signup"
-          options={{
-            headerShown: true,
-            headerTitle: "Signup",
-            headerTitleAlign: "center",
-          }}
-        />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="book/[id]"
-          options={{
-            headerShown: true,
-            headerTitle: "Book",
-            headerTitleAlign: "center",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerShadowVisible: false,
-          }}
-        />
-      </Stack>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="(auth)/login"
+            options={{
+              headerShown: true,
+              headerTitle: "Login",
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name="(auth)/signup"
+            options={{
+              headerShown: true,
+              headerTitle: "Signup",
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="book/[id]"
+            options={{
+              headerShown: true,
+              headerTitle: "Book",
+              headerTitleAlign: "center",
+              headerStyle: {
+                backgroundColor: "#fff",
+              },
+              headerShadowVisible: false,
+            }}
+          />
+        </Stack>
+      </GestureHandlerRootView>
     </QueryClientProvider>
   );
 };

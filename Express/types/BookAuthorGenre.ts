@@ -1,5 +1,5 @@
 export interface BookWithAuthorsAndGenres {
-  bookId: number;
+  id: number;
   title: string;
   coverImage: string;
   pageCount: number;

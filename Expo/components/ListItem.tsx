@@ -15,14 +15,23 @@ type Props = Subset<
     authors: string[];
     genres: string[];
   }
->;
+> & {
+  onLongPress?: (id: number, title: string) => void;
+};
 
-const ListItem = ({ id, title, coverImage, authors, genres }: Props) => {
+const ListItem = ({
+  id,
+  title,
+  coverImage,
+  authors,
+  genres,
+  onLongPress,
+}: Props) => {
   const router = useRouter();
   const bookId = String(id);
 
   const handlePress = () => {
-    router.push({
+    router.navigate({
       pathname: "/book/[id]",
       params: { id: bookId },
     });
@@ -33,6 +42,7 @@ const ListItem = ({ id, title, coverImage, authors, genres }: Props) => {
       <Pressable
         android_ripple={{ color: "rgba(0,0,0,0.2)" }}
         onPress={handlePress}
+        onLongPress={() => onLongPress?.(id, title)}
         className="py-3"
       >
         <View className="flex flex-row gap-2">

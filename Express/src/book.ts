@@ -1,10 +1,10 @@
 import { count, eq, sql } from "drizzle-orm";
 import express, { Request, Response } from "express";
+import { EXPRESS_URL, PORT } from "./config";
 import { db } from "./db/db";
 import { Book, BookAuthor, BookGenre } from "./db/schema";
 
 const router = express.Router();
-const { EXPRESS_URL, PORT } = process.env;
 
 router.get("/api/book", async function (req: Request, res: Response) {
   try {

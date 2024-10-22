@@ -1,9 +1,8 @@
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
-import BookRouter from "./book";
-import CollectionRouter from "./collection";
+
 import { PORT } from "./config";
-import RecommendationRouter from "./recommendation";
+import { BookRouter, CollectionRouter, RecommendationRouter } from "./routes";
 import WebhookRouter from "./webhook";
 
 declare module "express-serve-static-core" {

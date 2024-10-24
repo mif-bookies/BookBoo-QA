@@ -8,6 +8,7 @@ import {
   getBooksByIds as defaultGetBooksByIds,
   getGenresByBookIds as defaultGetGenresByBookIds,
 } from "../data-access/recommendationDataAccess";
+import { CustomError } from "../../types/Error";
 
 interface ServiceDependencies {
   getBooksByIds?: typeof defaultGetBooksByIds;
@@ -37,11 +38,7 @@ export async function fetchBookRecommendations(
 
   if (!validation.success) {
     const errorDetails = validation.error;
-    throw {
-      status: 400,
-      error: "Invalid request parameters",
-      details: errorDetails,
-    };
+    throw new CustomError(400, "Invalid request parameters", errorDetails);
   }
 
   const {
@@ -62,10 +59,10 @@ export async function fetchBookRecommendations(
     );
 
     if (!response.ok) {
-      throw {
-        status: response.status,
-        error: "Error from recommendation service",
-      };
+      throw new CustomError(
+        response.status,
+        "Error from recommendation service"
+      );
     }
 
     const recommendedIds: number[] = await response.json();
@@ -93,7 +90,7 @@ export async function fetchBookRecommendations(
       throw serviceError;
     } else {
       console.error("Error fetching book recommendations:", error);
-      throw { status: 500, error: "Internal server error" };
+      throw new CustomError(500, "Internal server error");
     }
   }
 }

@@ -17,8 +17,8 @@ const collectionController = {
       console.error("Error fetching public collections:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 
@@ -36,8 +36,8 @@ const collectionController = {
       console.error("Error fetching user collections:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 
@@ -55,8 +55,8 @@ const collectionController = {
       console.error("Error fetching collection details:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 
@@ -89,8 +89,8 @@ const collectionController = {
       console.error("Error creating collection:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 
@@ -130,8 +130,8 @@ const collectionController = {
       console.error("Error adding book to collection:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 
@@ -163,8 +163,8 @@ const collectionController = {
       console.error("Error removing book from collection:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 
@@ -214,8 +214,8 @@ const collectionController = {
       console.error("Error updating collection:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 
@@ -242,8 +242,8 @@ const collectionController = {
       console.error("Error deleting collection:", error);
       const err = error as { status?: number; message?: string };
       res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal server error" });
+        .status(err.status ?? 500)
+        .json({ error: err.message ?? "Internal server error" });
     }
   },
 };

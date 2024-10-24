@@ -41,6 +41,8 @@ export async function searchBooks(
   limit: number,
   offset: number
 ) {
+  const searchQuery = `%${query}%`;
+
   return db
     .select({
       id: Book.id,
@@ -53,17 +55,18 @@ export async function searchBooks(
       publicationYear: Book.publication_year,
     })
     .from(Book)
-    .where(sql`title ILIKE ${`%${query}%`}`)
+    .where(sql`title ILIKE ${searchQuery}`)
     .limit(limit)
     .offset(offset)
     .execute();
 }
 
 export async function getTotalBooksCount(query: string) {
+  const searchQuery = `%${query}%`;
   const result = await db
     .select({ count: count() })
     .from(Book)
-    .where(sql`title ILIKE ${`%${query}%`}`)
+    .where(sql`title ILIKE ${searchQuery}`)
     .execute();
 
   return Number(result[0]?.count) || 0;

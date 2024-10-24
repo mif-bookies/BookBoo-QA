@@ -76,7 +76,7 @@ router.post(
 
       const insertUser: InsertUser = {
         id: user_id,
-        username: username || "BookBooUser",
+        username: username ?? "BookBooUser",
       };
 
       try {

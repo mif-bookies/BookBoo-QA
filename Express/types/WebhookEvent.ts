@@ -235,7 +235,6 @@ export type MembershipRole = ClerkAuthorization extends Placeholder
     ? ClerkAuthorization["role"] | "admin" | "basic_member" | "guest_member"
     : Autocomplete<"admin" | "basic_member" | "guest_member">
   : Autocomplete<"admin" | "basic_member" | "guest_member">;
-export type OrganizationMembershipRole = MembershipRole;
 
 interface OrganizationMembershipPublicMetadata {
   [k: string]: unknown;
@@ -251,7 +250,7 @@ export interface OrganizationMembershipJSON extends ClerkResourceJSON {
   public_metadata: OrganizationMembershipPublicMetadata;
   private_metadata?: OrganizationMembershipPrivateMetadata;
   public_user_data: OrganizationMembershipPublicUserDataJSON;
-  role: OrganizationMembershipRole;
+  role: MembershipRole;
   created_at: number;
   updated_at: number;
 }
@@ -295,7 +294,7 @@ export interface OrganizationInvitationJSON extends ClerkResourceJSON {
   organization_id: string;
   public_metadata: OrganizationInvitationPublicMetadata;
   private_metadata: OrganizationInvitationPrivateMetadata;
-  role: OrganizationMembershipRole;
+  role: MembershipRole;
   status: OrganizationInvitationStatus;
   created_at: number;
   updated_at: number;

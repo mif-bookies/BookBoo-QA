@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import { Author } from "../../types/Author";
 import { Book } from "../../types/Book";
+import { CustomError } from "../../types/Error";
 import { Genre } from "../../types/Genre";
 import { bookRecommendationRequestSchema } from "../../types/validationSchemas";
 import {
@@ -8,7 +9,6 @@ import {
   getBooksByIds as defaultGetBooksByIds,
   getGenresByBookIds as defaultGetGenresByBookIds,
 } from "../data-access/recommendationDataAccess";
-import { CustomError } from "../../types/Error";
 
 interface ServiceDependencies {
   getBooksByIds?: typeof defaultGetBooksByIds;

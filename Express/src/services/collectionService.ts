@@ -1,6 +1,6 @@
 import { BookWithAuthorsAndGenres } from "../../types/BookAuthorGenre";
-import * as dataAccess from "../data-access/collectionDataAccess";
 import { CustomError } from "../../types/Error";
+import * as dataAccess from "../data-access/collectionDataAccess";
 
 export async function fetchPublicCollections() {
   const publicCollections = await dataAccess.getPublicCollections();

@@ -66,10 +66,6 @@ router.post(
       });
     }
 
-    console.log(`Webhook with an ID of ${id} and type of ${eventType}`);
-    // Payload preview
-    console.log("Webhook body:", evt.data);
-
     if (eventType === "user.created") {
       const user_id = evt.data.id;
       const username = evt.data.username;

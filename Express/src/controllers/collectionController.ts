@@ -116,11 +116,17 @@ const collectionController = {
     const collection_id = parseInt(paramsValidation.data.collectionId, 10);
     const userId = req.auth?.userId;
 
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: User ID is missing" });
+    }
+
     try {
       const addedBook = await collectionService.addBookToUserCollection(
         collection_id,
         book_id,
-        userId!
+        userId
       );
       res.json({
         message: "Book added to collection successfully",
@@ -152,11 +158,17 @@ const collectionController = {
     const book_id = parseInt(bookId, 10);
     const userId = req.auth?.userId;
 
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: User ID is missing" });
+    }
+
     try {
       await collectionService.removeBookFromUserCollection(
         collection_id,
         book_id,
-        userId!
+        userId
       );
       res.json({ message: "Book removed from collection successfully" });
     } catch (error) {
@@ -203,11 +215,17 @@ const collectionController = {
 
     const userId = req.auth?.userId;
 
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: User ID is missing" });
+    }
+
     try {
       const updatedCollection = await collectionService.updateUserCollection(
         parseInt(collectionId, 10),
         updateFields,
-        userId!
+        userId
       );
       res.json(updatedCollection);
     } catch (error) {
@@ -232,10 +250,16 @@ const collectionController = {
     const { collectionId } = paramsValidation.data;
     const userId = req.auth?.userId;
 
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: User ID is missing" });
+    }
+
     try {
       await collectionService.deleteUserCollection(
         parseInt(collectionId, 10),
-        userId!
+        userId
       );
       res.json({ message: "Collection deleted successfully" });
     } catch (error) {

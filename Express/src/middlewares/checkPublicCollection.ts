@@ -13,7 +13,7 @@ export async function checkPublicCollection(
     const collectionIdNum = parseInt(collectionId, 10);
     const collection = await getCollectionById(collectionIdNum);
 
-    if (collection && collection.public) {
+    if (collection?.public) {
       if (req.headers.authorization) {
         await authMiddleware(req, res, () => next());
       } else {

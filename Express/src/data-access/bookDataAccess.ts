@@ -42,7 +42,6 @@ export async function searchBooks(
   offset: number
 ) {
   const searchQuery = `%${query}%`;
-
   return db
     .select({
       id: Book.id,
